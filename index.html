@@ -171,15 +171,20 @@ function readerRender(btn){
     console.log(`Scan result: ${decodedText}`, decodedResult);
   }
 
-  var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10,aspectRatio:1 });
+  var html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader", 
+    { fps: 10,
+      aspectRatio:1,
+      supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+      rememberLastUsedCamera: true,
+      formatsToSupport: [ Html5QrcodeSupportedFormats.QR_CODE ],
+      showTorchButtonIfSupported :true
+    });
 
   html5QrcodeScanner.render(onScanSuccess);
 
   let img = document.querySelector('img[alt="Info icon"]')
   img.remove();
-  let span = document.getElementById('html5-qrcode-anchor-scan-type-change')
-  span.parentElement.previousElementSibling.children[1].style.display = 'none';
-  span.parentElement.style.display = 'none'
   let reader = document.getElementById('reader')
   reader.style=''
   permissionBtn = document.getElementById('html5-qrcode-button-camera-permission')
@@ -203,8 +208,6 @@ function readerRender(btn){
     clearInterval(interval);
 
   }
-
-  // const interval = setInterval(abserve, 500);
 }
   
 

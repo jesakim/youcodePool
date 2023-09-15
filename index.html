@@ -116,6 +116,7 @@
       
       <div class="card-body pt-2">
         <button type="button" onclick="readerRender(this)" class="btn bg-gradient-info w-100 m-0">Click To Scan</button>
+        <div id="result"></div>
         <div id="reader" ></div>
       </div>
     </div>
@@ -169,6 +170,12 @@ function readerRender(btn){
   function onScanSuccess(decodedText, decodedResult) {
     // Handle on success condition with the decoded text or result.
     console.log(`Scan result: ${decodedText}`, decodedResult);
+
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = `<strong>Scanned QR Code:</strong> ${decodedText}`;
+
+    // Stop the scanner after a successful scan
+    html5QrcodeScanner.clear();
   }
 
   var html5QrcodeScanner = new Html5QrcodeScanner(

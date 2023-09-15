@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="./assets/img/icon.png">
+  <title>
+    Youcode Pool
+  </title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <link id="pagestyle" href="./assets/css/material-kit.css?v=3.0.4" rel="stylesheet" />
+</head>
+
+<body class="index-page bg-info"> 
+  
+  <!-- Navbar -->
+<div class="container position-sticky z-index-sticky top-0"><div class="row"><div class="col-12">
+<nav class="navbar navbar-expand-lg  blur border-radius-xl top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+  <div class="container-fluid px-0">
+    <a class="navbar-brand font-weight-bolder ms-sm-3" href="https://demos.creative-tim.com/material-kit/index" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
+      Youcode Pool
+    </a>
+    <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon mt-2">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+      </span>
+    </button>
+    <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
+      <ul class="navbar-nav navbar-nav-hover ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="#">Duo Matches History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="#">Solo Matches History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="#">Rules</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="#">Username</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- End Navbar -->
+</div></div></div>
+
+<div class="" style="height: 100px;"></div>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body p-3">
+            <div class="row gx-4">
+            <div class="col-auto">
+                <div class="avatar avatar-xl position-relative">
+                    <img src="https://ui-avatars.com/api/?name={{$user->name}}&background=random&size=350&uppercase=false&font-size=0.5" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                </div>
+            </div>
+            <div class="col-auto my-auto">
+                <div class="h-100">
+                    <h5 class="mb-1">
+                        {{$user->name}}
+                    </h5>
+                    <p class="mb-0 font-weight-bold text-sm">
+                        {{$user->email}}
+                    </p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row gy-3 mt-3">
+        <div class="col-md-6 patientTab mt-3 m-0" id="infoTab">
+            <div class="card">
+            <div class="card-body">
+            <p class="text-uppercase text-bold">Information</p>
+            <div class="row align-items-center">
+                <form action="{{route('profile.changeinfo',$user->id)}}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="col">
+                        <div class="input-group input-group-static mb-4">
+                            <label>Full Name</label>
+                            <input type="text" class="form-control profile-inp" required value="Full Name" disabled>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="input-group input-group-static mb-4">
+                            <label>UserName</label>
+                            <input type="text" class="form-control profile-inp" required value="username" disabled>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mt-3 m-0">
+                            <button type="button" class="btn btn-primary w-100 m-0" onclick="editProfile(this)">Edit</button>
+                            <button type="submit" class="btn btn-primary w-100 d-none m-0">Save Changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+            </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 m-0 mt-3">
+            <div class="card">
+                <div class="card-body">
+                <p class="text-uppercase text-bold">Change Password</p>
+                <div class="row align-items-center">
+                    <form action="{{route('profile.changepassword',$user->id)}}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="col">
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Current password</label>
+                                <input class="form-control" type="password" required name="currentpass">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">New password</label>
+                                <input class="form-control" type="password" required name="newpass">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group input-group-outline my-3">
+                                <label class="form-label">Confirm New password</label>
+                                <input class="form-control" type="password" required name="newpass_confirmation">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mt-3 m-0">
+                                <button type="submit" class="btn btn-primary w-100 m-0">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+<script>
+    function editProfile(elem){
+    elem.classList.add('d-none')
+    elem.nextElementSibling.classList.remove('d-none')
+    inputs = document.getElementsByClassName('profile-inp')
+    Array.from(inputs).forEach(input => {
+        input.removeAttribute('disabled')
+
+    });
+}
+</script>
+
+<script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<script src="./assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script>
+
+</body>
+
+</html>
